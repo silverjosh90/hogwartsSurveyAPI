@@ -8,7 +8,7 @@ function users() {
   return knex('users')
 }
 
-apiRouter.route('/users')
+apiRouter.route('/')
   .get(function(req,res){
     users().select().then(function(results){
       res.json(results)
@@ -22,7 +22,7 @@ apiRouter.route('/users')
     })
   })
 
-apiRouter.route('/users/:userid')
+apiRouter.route('/:userid')
     .get(function(req,res){
       users().select().first().where('id',req.params.userid).then(function(results){
         res.json(results)
