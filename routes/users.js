@@ -20,11 +20,11 @@ apiRouter.route('/')
     if(req.body.token == process.env.access_secret) {
     users().insert({name: req.body.name, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
       res.json({message: 'User created!'})
+    })
     }
     else{
       res.json({message: 'Invalid token!!!'})
     }
-    })
   })
 
 apiRouter.route('/:userid')
