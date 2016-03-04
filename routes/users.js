@@ -11,16 +11,16 @@ function users() {
 apiRouter.route('/')
   .get(function(req,res){
     console.log(req.body);
-    if(req.body.token == process.env.access_secret) {
+    // if(req.body.token == process.env.access_secret) {
     users().select().then(function(results){
       console.log(results);
       res.json(results)
 
     })
-  }
-  else {
-    res.json({message: "Invalid Token!!!!"})
-  }
+  // }
+  // else {
+  //   res.json({message: "Invalid Token!!!!"})
+  // }
   })
   .post(function(req,res){
 
