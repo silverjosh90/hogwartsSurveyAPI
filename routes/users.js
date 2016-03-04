@@ -16,9 +16,14 @@ apiRouter.route('/')
     })
   })
   .post(function(req,res){
-    console.log(req.body);
+    console.log(process.env.access_secret);
+    if(req.body.token == process.env.access_secret) {
     users().insert({name: req.body.name, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
       res.json({message: 'User created!'})
+    }
+    else{
+      res.json({message: 'Invalid token!!!'})
+    }
     })
   })
 
@@ -29,7 +34,6 @@ apiRouter.route('/:userid')
       })
     })
     .put(function(req,res){
-      console.log(req.body);
       users().update(req.body).where('id',req.params.userid).then(function(results){
         res.json({message: 'Updated User!'})
       })
