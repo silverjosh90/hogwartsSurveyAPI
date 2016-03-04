@@ -29,6 +29,7 @@ apiRouter.route('/:userid')
       })
     })
     .put(function(req,res){
+      console.log(req.body);
       users().update(req.body).where('id',req.params.userid).then(function(results){
         res.json({message: 'Updated User!'})
       })
