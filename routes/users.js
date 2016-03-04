@@ -15,8 +15,6 @@ apiRouter.route('/')
       res.json(results)
 
     })
-    
-      res.json('Invalid token!!!')
   })
   .post(function(req,res){
 
