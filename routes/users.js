@@ -16,8 +16,7 @@ apiRouter.route('/')
     })
   })
   .post(function(req,res){
-    console.log(req.body.token);
-    req.body.token = null
+    console.log(req.body);
     users().insert({name: req.body.name, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
       res.json({message: 'User created!'})
     })
