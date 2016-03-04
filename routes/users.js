@@ -1,9 +1,42 @@
 var express = require('express');
-var router = express.Router();
+var apiRouter = express.Router();
+var knex = require('../db/knex.js')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+/* GET home page. */
 
-module.exports = router;
+function users() {
+  return knex('users')
+}
+
+apiRouter.route('/users')
+  .get(function(req,res){
+    users().select().then(function(results){
+      res.json(results)
+
+    })
+  })
+  .post(function(req,res){
+    console.log(req.body);
+    users().insert(req.body).then(function(results){
+      res.json({message: 'User created!'})
+    })
+  })
+
+apiRouter.route('/users/:userid')
+    .get(function(req,res){
+      users().select().first().where('id',req.params.userid).then(function(results){
+        res.json(results)
+      })
+    })
+    .put(function(req,res){
+      users().update(req.body).where('id',req.params.userid).then(function(rest){
+        res.json({message: 'Updated User!'})
+      })
+    })
+    .delete(function(req,res){
+    users().delete().where('id', req.params.userid).then(function(results) {
+      res.json({message:  "User Deleted"})
+    })
+  });
+
+module.exports = apiRouter;
