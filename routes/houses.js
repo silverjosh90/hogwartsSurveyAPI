@@ -8,7 +8,7 @@ function houses() {
   return knex('houses')
 }
 
-apiRouter.route('/houses')
+apiRouter.route('/')
   .get(function(req,res){
     houses().select().then(function(results){
       res.json(results)
@@ -22,7 +22,7 @@ apiRouter.route('/houses')
     })
   })
 
-apiRouter.route('/houses/:housesid')
+apiRouter.route('/:housesid')
     .get(function(req,res){
       houses().select().first().where('id',req.params.housesid).then(function(results){
         res.json(results)

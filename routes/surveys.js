@@ -8,7 +8,7 @@ function surveys() {
   return knex('surveys')
 }
 
-apiRouter.route('/surveys')
+apiRouter.route('/')
   .get(function(req,res){
     surveys().select().then(function(results){
       res.json(results)
@@ -21,7 +21,7 @@ apiRouter.route('/surveys')
     })
   })
 
-apiRouter.route('/surveys/:surveysid')
+apiRouter.route('/:surveysid')
     .get(function(req,res){
       surveys().select().first().where('id',req.params.surveysid).then(function(results){
         res.json(results)
