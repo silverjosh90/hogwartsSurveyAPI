@@ -16,7 +16,8 @@ apiRouter.route('/')
     })
   })
   .post(function(req,res){
-    console.log(req.body);
+    console.log(req.body.token);
+    req.body.token = null
     users().insert(req.body).then(function(results){
       res.json({message: 'User created!'})
     })
