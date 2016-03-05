@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('name');
     table.string('imageUrl');
-    table.string('description');
-    table.string('attributes');
+    table.string('traits');
+    table.string('quote');
   })
 };
 
