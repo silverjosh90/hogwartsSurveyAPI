@@ -1,6 +1,7 @@
 var express = require('express');
 var apiRouter = express.Router();
 var knex = require('../db/knex.js')
+var server = require('../serverlogic/serverlogic.js')
 
 /* GET home page. */
 
@@ -25,9 +26,16 @@ apiRouter.route('/')
   .post(function(req,res){
     console.log(req.body);
     if(req.body.token == process.env.access_secret) {
+    var existingUser = server.checkIfUser(req.body.fb_id)
+    if (existingUser) {
+      res.json({message: 'User Exists!'})
+    }
+    else {
+
     users().insert({firstname: req.body.firstname, lastname: req.body.lastname, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
       res.json({message: 'User created!'})
     })
+  }
     }
     else{
       res.json({message: 'Invalid token!!!'})
