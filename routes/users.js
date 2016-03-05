@@ -24,9 +24,11 @@ apiRouter.route('/')
   // }
   })
   .post(function(req,res){
-    console.log(req.body);
     if(req.body.token == process.env.access_secret) {
-    var existingUser = server.checkIfUser(req.body.fb_id)
+
+    server.checkIfUser(req.body.fb_id).then(function(existingUser) {
+
+    console.log(existingUser);
     if (existingUser) {
       res.json({message: 'User Exists!'})
     }
@@ -36,6 +38,7 @@ apiRouter.route('/')
       res.json({message: 'User created!'})
     })
   }
+      })
     }
     else{
       res.json({message: 'Invalid token!!!'})

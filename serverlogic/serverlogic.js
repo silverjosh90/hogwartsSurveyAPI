@@ -7,12 +7,12 @@ function users(){
 
 
 function checkIfUser(fbid) {
-  users().select().where(fb_id, fbid).then(function(results){
-    console.log(results);
-  })
+  var derp;
 
+  return users().select().where('fb_id', fbid).first()
 }
 
 module.exports = {
+  hello: 'hello',
   checkIfUser: checkIfUser
 }
