@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('name');
     table.string('profilepicture');
-    table.integer('fb_id');
+    table.float('fb_id');
   })
 };
 
