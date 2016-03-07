@@ -24,7 +24,7 @@ apiRouter.route('/')
 apiRouter.route('/:surveysname')
     .get(function(req,res){
       surveys().select().first().where('dominant_house',req.params.surveysname).then(function(results){
-        console.log(results);
+        console.log('hello from the dominant house');
         res.json(results)
       })
     })

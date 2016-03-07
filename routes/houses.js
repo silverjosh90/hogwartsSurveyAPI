@@ -22,12 +22,13 @@ apiRouter.route('/')
     })
   })
 
-apiRouter.route('/:housesid')
-    .get(function(req,res){
-      houses().select().first().where('id',req.params.housesid).then(function(results){
-        res.json(results)
+  apiRouter.route('/:housesname')
+      .get(function(req,res){
+        surveys().select().first().where('dominant_house',req.params.housesname).then(function(results){
+          console.log('hello from the dominant house');
+          res.json(results)
+        })
       })
-    })
     .put(function(req,res){
       houses().update(req.body).where('id',req.params.housesid).then(function(rest){
         res.json({message: 'Updated house!'})
