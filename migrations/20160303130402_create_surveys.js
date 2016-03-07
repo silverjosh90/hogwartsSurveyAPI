@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
     table.string('slytherin');
     table.string('hufflepuff');
     table.string('ravenclaw');
-    table.integer('user_id');
-    table.integer('house_id');
+    table.bigint('fb_id');
+    table.string('dominant_house');
   })
 };
 

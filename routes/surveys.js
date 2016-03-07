@@ -16,7 +16,7 @@ apiRouter.route('/')
     })
   })
   .post(function(req,res){
-    surveys().insert(req.body).then(function(results){
+    surveys().insert({gryffindor: req.body.gryffindor, slytherin: req.body.slytherin, hufflepuff: req.body.hufflepuff, ravenclaw: req.body.ravenclaw, fb_id: req.body.zfbId, dominant_house: req.body.dominantHouse }).then(function(results){
       res.json({message: 'Survey created!'})
     })
   })
