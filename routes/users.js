@@ -11,7 +11,6 @@ function users() {
 
 apiRouter.route('/')
   .get(function(req,res){
-    console.log(req.body);
     // if(req.body.token == process.env.access_secret) {
     users().select().then(function(results){
 
@@ -25,25 +24,25 @@ apiRouter.route('/')
   })
   .post(function(req,res){
     if(req.body.token == process.env.access_secret) {
-
     server.checkIfUser(req.body.fb_id).then(function(existingUser) {
 
     console.log(existingUser);
     if (existingUser) {
-      console.log(existingUser);
-      res.json({message: 'User Exists!'})
+      users().select().where('fb_id', req.body.fb_id).first().then(function(result){
+
+      res.json({message: result})
+    })
     }
     else {
 
-    users().insert({firstname: req.body.firstname, lastname: req.body.lastname, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
-      console.log(results);
+    users().insert({firstname: req.body.firstname, lastname: req.body.lastname, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).returning('id').then(function(results){
+
       res.json({message: 'User created!'})
     })
   }
       })
     }
     else{
-      console.log(results);
       res.json({message: 'Invalid token!!!'})
     }
   })
