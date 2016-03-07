@@ -24,20 +24,21 @@ apiRouter.route('/')
   })
   .post(function(req,res){
     if(req.body.token == process.env.access_secret) {
-    server.checkIfUser(req.body.fb_id).then(function(existingUser) {
+    server.checkIfUser(req.body.fb_id).first().then(function(existingUser) {
 
-    console.log(existingUser);
+
     if (existingUser) {
-      users().select().where('fb_id', req.body.fb_id).first().then(function(result){
-
-      res.json({message: result})
-    })
+      res.json({message: existingUser})
     }
     else {
 
     users().insert({firstname: req.body.firstname, lastname: req.body.lastname, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).returning('id').then(function(results){
+      var user = results[0]
+      users().select().where('id', user).first().then(function(rest){
 
-      res.json({message: 'User created!'})
+        res.json({message: rest})
+      })
+
     })
   }
       })
