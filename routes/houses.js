@@ -23,8 +23,8 @@ apiRouter.route('/')
   })
 
   apiRouter.route('/:housesname')
-    console.log('kind of working');
       .get(function(req,res){
+        console.log('getting here!');
         houses().select().first().where('dominant_house',req.params.housesname).then(function(results){
           console.log('hello from the dominant house');
           res.json({message: 'Its there!'})
