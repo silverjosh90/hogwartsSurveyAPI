@@ -21,9 +21,10 @@ apiRouter.route('/')
     })
   })
 
-apiRouter.route('/:surveysid')
+apiRouter.route('/:surveysname')
     .get(function(req,res){
-      surveys().select().first().where('id',req.params.surveysid).then(function(results){
+      surveys().select().first().where('dominant_house',req.params.surveysname).then(function(results){
+        console.log(results);
         res.json(results)
       })
     })
