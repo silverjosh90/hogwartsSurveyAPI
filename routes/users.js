@@ -30,17 +30,20 @@ apiRouter.route('/')
 
     console.log(existingUser);
     if (existingUser) {
+      console.log(existingUser);
       res.json({message: 'User Exists!'})
     }
     else {
 
     users().insert({firstname: req.body.firstname, lastname: req.body.lastname, profilepicture: req.body.profilepicture, fb_id: req.body.fb_id}).then(function(results){
+      console.log(results);
       res.json({message: 'User created!'})
     })
   }
       })
     }
     else{
+      console.log(results);
       res.json({message: 'Invalid token!!!'})
     }
   })
